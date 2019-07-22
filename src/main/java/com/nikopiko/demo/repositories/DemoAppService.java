@@ -4,6 +4,8 @@ import com.nikopiko.demo.entity.Category;
 import com.nikopiko.demo.entity.Joke;
 import com.nikopiko.demo.util.TextGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,8 +33,8 @@ public class DemoAppService {
         jokeRepository.save(joke);
     }
 
-    public List<Joke> getAllJokes() {
-        List<Joke> jokes = jokeRepository.findAllByOrderByDiffDesc();
+    public Page<Joke> getAllJokes(int pageNumber, int pagesize) {
+        Page<Joke> jokes = jokeRepository.findAllByOrderByDiffDesc(PageRequest.of(pageNumber, pagesize));
         return jokes;
     }
 

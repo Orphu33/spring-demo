@@ -37,7 +37,7 @@
 
     <tbody>
     <tr th:each="joke, i : ${jokes}">
-        <td th:text="${i.index + 1}"></td>
+        <td th:text="${(jokes.getNumber() * 10) + i.index + 1}"></td>
         <td th:text="${joke.category.getName()}">Smith</td>
         <td th:text="${joke.content}">Smith</td>
         <td class="w3-center" th:text="${joke.likes}">Smith</td>
@@ -54,6 +54,14 @@
     </tr>
     </tbody>
 </table>
+
+<div class="w3-center">
+    <div class="w3-bar">
+        <th:block th:each="i: ${#numbers.sequence(0, jokes.getTotalPages()-1)}">
+            <a th:href="@{/jokes(pageNumber=${i})}" th:text="${i+1}" class="w3-button">2</a>
+        </th:block>
+    </div>
+</div>
 
 <div th:replace="fragments/general.html :: footer"></div>
 

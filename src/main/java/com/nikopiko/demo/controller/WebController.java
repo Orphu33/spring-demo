@@ -1,16 +1,9 @@
 package com.nikopiko.demo.controller;
 
-import com.nikopiko.demo.entity.Joke;
 import com.nikopiko.demo.model.JokeForm;
 import com.nikopiko.demo.model.LoginForm;
 import com.nikopiko.demo.repositories.DemoAppService;
-import com.nikopiko.demo.repositories.JokeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,12 +19,10 @@ public class WebController {
     @Autowired
     DemoAppService appService;
 
-    @Autowired
-    JokeRepository jokeRepository;
-
     @GetMapping(value = {"", "/", "jokes"})
-    public String getAllJokes(Model model) {
-        model.addAttribute("jokes", appService.getAllJokes());
+    public String getAllJokes(Model model, @RequestParam(name = "pageNumber", required = false, defaultValue = "0") int pageNumber) {
+        int pageSize = 10;
+        model.addAttribute("jokes", appService.getAllJokes(pageNumber, pageSize));
         return "jokes";
     }
 
