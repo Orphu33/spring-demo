@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments/general.html :: headerfiles (pagetitle='Add Joke')">
+</head>
+
+<body>
+
+<header th:replace="fragments/general.html :: header (title='Jokes')"></header>
+
+<div class="w3-container">
+<form class="w3-container w3-display-middle" style="width: 50%" th:action="@{/new}" th:object="${jokeForm}" method="post">
+
+    <label class="w3-text-blue w3-left w3-padding-small"><b>Choose category</b></label>
+    <select th:field="*{catId}" class="w3-select w3-border" name="option">
+       <!--<option value="NONE">-- Select a category --</option>-->
+        <option th:each="cat : ${categories}" th:value="${cat.getId()}" th:text="${cat.getName()}">Puns</option>
+    </select>
+
+    <label class="w3-text-blue w3-left w3-padding-small"><b>Enter joke</b></label>
+    <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" class="w3-text-red w3-padding-small">Content</div>
+    <textarea class="w3-input w3-border" name="content" th:field="*{content}" cols="40" rows="4"></textarea>
+
+    <button type="submit" class="w3-btn w3-blue w3-right">Save</button>
+
+</form>
+</div>
+
+<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>

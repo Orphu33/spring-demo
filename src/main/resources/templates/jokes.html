@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head th:replace="fragments/general.html :: headerfiles (pagetitle='Jokes')">
+    <style>
+        .fa-thumbs-up:hover {
+            color: #00bcd4;
+        }
+        .fa-thumbs-down:hover {
+            color: #00bcd4;
+        }
+    </style>
+</head>
+
+<body>
+
+<header th:replace="fragments/general.html :: header (title='Jokes')"></header>
+
+<a th:href="@{/insert}">
+    Insert 25 jokes
+</a>
+
+<table class="w3-table-all">
+    <thead>
+    <tr>
+        <th style="width: 5%">#</th>
+        <th style="width: 15%">Category</th>
+        <th style="width: 50%">Joke</th>
+        <th style="width: 5%">Likes</th>
+        <th style="width: 5%">Dislikes</th>
+        <th style="width: 5%">Difference</th>
+        <th style="width: 15%">Vote</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="joke, i : ${jokes}">
+        <td th:text="${i.index + 1}"></td>
+        <td th:text="${joke.category.getName()}">Smith</td>
+        <td th:text="${joke.content}">Smith</td>
+        <td class="w3-center" th:text="${joke.likes}">Smith</td>
+        <td class="w3-center" th:text="${joke.dislikes}">Smith</td>
+        <td class="w3-center" th:text="${joke.diff}">Smith</td>
+        <td>
+            <a th:href="@{/jokes/like(id=${joke.getId()}, like='likes')}">
+                <i class="fas fa-thumbs-up" style="font-size: large"></i>
+            </a>
+            <a th:href="@{/jokes/like(id=${joke.getId()}, like='dislikes')}">
+                <i class="fas fa-thumbs-down" style="font-size: large"></i>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="fragments/general.html :: footer"></div>
+
+</body>
+</html>

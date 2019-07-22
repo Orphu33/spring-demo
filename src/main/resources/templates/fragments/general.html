@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:fragment="headerfiles (pagetitle)">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css" th:href="@{/css/w3.css}">
+    <link rel='stylesheet' type="text/css" href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' th:href="@{//use.fontawesome.com/releases/v5.7.0/css/all.css}">
+    <title th:text="${pagetitle}">Title</title>
+</head>
+
+<body>
+
+<!-- Header -->
+<div th:fragment="header (title)" class="w3-display-container" id="myHeader">
+    <div class="w3-center w3-teal">
+        <h4></h4>
+        <h1 class="w3-xxxlarge w3-animate-bottom" th:text="${title}">My Title</h1>
+        <div class="w3-padding-32">
+        </div>
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a th:href="@{/new}">
+            <div class="w3-display-topright w3-padding w3-text-white w3-hover-blue-gray">Add new joke </div>
+        </a>
+        <div class="w3-display-topleft w3-padding w3-text-white" sec:authentication="name"></div>
+
+    </div>
+
+    <div  sec:authorize="isAnonymous()">
+        <a th:href="@{/login}">
+            <div class="w3-display-topleft w3-padding w3-text-white w3-hover-blue-gray">Login</div>
+        </a>
+    </div>
+</div>
+
+<div th:fragment="footer" class="w3-container w3-bottom w3-teal">
+
+    <div>
+        © 2019 nikopiko.com
+        <span sec:authorize="isAuthenticated()" style="display: inline-block;">
+            | Logged user: <span sec:authentication="name"></span> |
+            Roles: <span sec:authentication="principal.authorities"></span> |
+            <a th:href="@{/logout}">Sign Out</a>
+        </span>
+    </div>
+    <div class="w3-padding-16"></div>
+
+</div>
+
+</body>
+</html>

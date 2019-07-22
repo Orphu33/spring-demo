@@ -1,0 +1,1 @@
+ALTER TABLE joke RENAME COLUMN joke TO content;
