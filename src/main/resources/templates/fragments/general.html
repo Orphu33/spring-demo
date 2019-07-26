@@ -5,6 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <style th:fragment="font-awesome">
+        .fa-thumbs-up:hover {
+            color: #00bcd4;
+        }
+        .fa-thumbs-down:hover {
+            color: red;
+        }
+    </style>
+
     <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css" th:href="@{/css/w3.css}">
     <link rel='stylesheet' type="text/css" href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' th:href="@{//use.fontawesome.com/releases/v5.7.0/css/all.css}">
     <title th:text="${pagetitle}">Title</title>
